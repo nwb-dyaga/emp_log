@@ -5,6 +5,7 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/joho/godotenv"
+	"log"
 	"os"
 )
 
@@ -20,7 +21,7 @@ func init() {
 	dbUri := fmt.Sprintf("host=%s user=%s dbname=%s sslmode=disable password=%s", dbHost, username, dbName, password)
 	connect, err := gorm.Open("postgres", dbUri)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 	}
 	db = connect
 	db.AutoMigrate(&HttpLog{})

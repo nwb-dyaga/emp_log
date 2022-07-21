@@ -25,7 +25,7 @@ func (rcl *RabbitClient) Consume(n string, f func([]byte) bool) {
 	}
 	m, err := rcl.recChan.Consume(
 		q.Name,
-		"", //uuid.NewV4().String()
+		"",
 		true,
 		false,
 		false,
@@ -33,9 +33,8 @@ func (rcl *RabbitClient) Consume(n string, f func([]byte) bool) {
 		nil,
 	)
 	if err != nil {
-		log.Println("--- failed to consume from queue, trying again ---")
+		log.Println("--- failed to consume ---")
 	}
-	//shouldBreak := false
 	var forever chan struct{}
 	go func() {
 		for d := range m {
